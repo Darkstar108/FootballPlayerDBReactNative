@@ -5,7 +5,7 @@ import {
     Text
   } from 'react-native';
 import * as Constants from '../constants'
-import Colors from './app/colors'
+import Colors from '../colors'
 
 const PlayerCard = () => {
     return (
