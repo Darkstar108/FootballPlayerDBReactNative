@@ -1,0 +1,2 @@
+export const ABOUT_SCREEN_TITLE = "About"
+export const ABOUT_SCREEN_CONTENT = "FootballPlayerDB is a database of football players along with their ratings. Users can view players as well as add, edit or delete players"
