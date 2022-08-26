@@ -11,7 +11,6 @@ import * as Constants from '../constants'
 import Colors from '../colors'
 
 const PlayerCard = (props) => {
-    console.log(props.playerDetail)
     return (
         <View style={styles.card}>
             <View style={styles.infoContainer}>
@@ -93,7 +92,8 @@ const PlayerCard = (props) => {
   const styles = StyleSheet.create({
     card: {
         padding: 10,
-        width: "100%",
+        marginVertical: 10,
+        marginHorizontal: 20,
         minHeight: 200,
         flexDirection: "column",
         backgroundColor: Colors.lightGrey,

@@ -16,12 +16,13 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-// import ToolbarAndroid from '@react-native-community/toolbar-android';
 
 import Colors from './app/colors'
 import About from './app/screens/AboutScreen';
 import PlayerCard from './app/components/PlayerCard';
+import PlayerListScreen from './app/screens/PlayerListScreen'
 import DrawerNavigation from './app/components/DrawerNavigation'
+import Toolbar from './app/components/Toolbar';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -84,16 +85,17 @@ const App: () => Node = () => {
   };
 
   return (
-    <DrawerLayoutAndroid
-      ref={drawer}
-      drawerWidth={300}
-      drawerPosition="left"
-      renderNavigationView={DrawerNavigation}
-    >
-      <ScrollView>
-        <PlayerCard playerDetail={playerDetails[0]}/>
-      </ScrollView>
-    </DrawerLayoutAndroid>
+    <>
+      <DrawerLayoutAndroid
+        ref={drawer}
+        drawerWidth={300}
+        drawerPosition="left"
+        renderNavigationView={DrawerNavigation}
+      >
+        <Toolbar/>
+        <PlayerListScreen playerDetails={playerDetails}/>
+      </DrawerLayoutAndroid>
+    </>
   );
 };
 
