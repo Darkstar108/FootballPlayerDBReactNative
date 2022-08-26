@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -5,7 +6,6 @@
  * @format
  * @flow strict-local
  */
-
 import React, { useRef } from 'react';
 import type {Node} from 'react';
 import {
@@ -16,6 +16,9 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Colors from './app/colors'
 import About from './app/screens/AboutScreen';
@@ -24,9 +27,11 @@ import PlayerListScreen from './app/screens/PlayerListScreen'
 import DrawerNavigation from './app/components/DrawerNavigation'
 import Toolbar from './app/components/Toolbar';
 
+// const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const drawer = useRef(null);
   const playerDetails = [
     {
       "name": "Lionel Messi",
@@ -85,17 +90,12 @@ const App: () => Node = () => {
   };
 
   return (
-    <>
-      <DrawerLayoutAndroid
-        ref={drawer}
-        drawerWidth={300}
-        drawerPosition="left"
-        renderNavigationView={DrawerNavigation}
-      >
-        <Toolbar/>
-        <PlayerListScreen playerDetails={playerDetails}/>
-      </DrawerLayoutAndroid>
-    </>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Player List">
+        <Drawer.Screen name="Player List" component={PlayerListScreen} initialParams={{playerDetails: playerDetails}} />
+        <Drawer.Screen name="About" component={About} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 };
 

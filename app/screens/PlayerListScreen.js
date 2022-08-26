@@ -10,7 +10,9 @@ import * as Constants from '../constants'
 import Colors from '../colors'
 import PlayerCard from '../components/PlayerCard';
 
-const PlayerList = (props) => {
+const PlayerList = ({route}) => {
+
+  console.log(route.params)
 
   const renderItem = ({ item }) => (
     <PlayerCard playerDetail={item}/>
@@ -24,7 +26,7 @@ const PlayerList = (props) => {
 
   return (
     <FlatList
-      data={props.playerDetails}
+      data={route.params.playerDetails}
       renderItem={renderItem}
       keyExtractor={item => item.name}
       ItemSeparatorComponent={ItemDivider}
