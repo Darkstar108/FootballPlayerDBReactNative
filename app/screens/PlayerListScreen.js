@@ -12,8 +12,6 @@ import PlayerCard from '../components/PlayerCard';
 
 const PlayerList = ({route}) => {
 
-  console.log(route.params)
-
   const renderItem = ({ item }) => (
     <PlayerCard playerDetail={item}/>
   );

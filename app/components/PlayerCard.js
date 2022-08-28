@@ -6,11 +6,14 @@ import {
     StyleSheet,
     Text,
     View,
-  } from 'react-native';
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import * as Constants from '../constants'
 import Colors from '../colors'
 
 const PlayerCard = (props) => {
+    const navigation = useNavigation();
+    console.log(props.playerDetail)
     return (
         <View style={styles.card}>
             <View style={styles.infoContainer}>
@@ -76,7 +79,7 @@ const PlayerCard = (props) => {
             <View style={styles.buttonContainer}>
                 <Button
                     title={Constants.EDIT_PLAYER_BUTTON_TITLE}
-                    onPress={() => Alert.alert('Edit Player Button pressed')}
+                    onPress={() => {navigation.navigate('Add Player', props.playerDetail);}}
                     color={Colors.teal}
                 />
                 <Button
