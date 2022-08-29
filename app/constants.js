@@ -25,3 +25,8 @@ export const PLAYER_MIDFIELD_RATING = "Midfield Rating"
 export const PLAYER_DEFENCE_RATING = "Defence Rating"
 export const PLAYER_IMAGE_URL_PLACEHOLDER = "Enter Player's ImageUrl"
 export const SUBMIT_PLAYER_BUTTON_TITLE = "Submit Player"
+
+// Redux
+export const PLAYER_LIST_ADD_PLAYER_ACTION = "playerList/addPlayer"
+export const PLAYER_LIST_EDIT_PLAYER_ACTION = "playerList/editPlayer"
+export const PLAYER_LIST_DELETE_PLAYER_ACTION = "playerList/deletePlayer"

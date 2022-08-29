@@ -13,7 +13,6 @@ import Colors from '../colors'
 
 const PlayerCard = (props) => {
     const navigation = useNavigation();
-    console.log(props.playerDetail)
     return (
         <View style={styles.card}>
             <View style={styles.infoContainer}>
@@ -79,7 +78,7 @@ const PlayerCard = (props) => {
             <View style={styles.buttonContainer}>
                 <Button
                     title={Constants.EDIT_PLAYER_BUTTON_TITLE}
-                    onPress={() => {navigation.navigate('Add Player', props.playerDetail);}}
+                    onPress={() => {navigation.navigate('Add Player', {playerDetail: props.playerDetail});}}
                     color={Colors.teal}
                 />
                 <Button

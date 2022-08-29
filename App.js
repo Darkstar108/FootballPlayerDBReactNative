@@ -20,6 +20,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Provider } from 'react-redux'
+import store from './app/redux/Store';
 
 import Colors from './app/colors'
 import About from './app/screens/AboutScreen';
@@ -89,7 +91,6 @@ const DrawerNavigator = () => {
     <Drawer.Navigator initialRouteName="Player List">
       <Drawer.Screen name="Player List" component={PlayerListScreen} initialParams={{playerDetails: playerDetails}} />
       <Drawer.Screen name="About" component={About} />
-      <Drawer.Screen name="Add Player" component={AddPlayer} />
     </Drawer.Navigator>
   );
 }
@@ -109,25 +110,35 @@ const App: () => Node = () => {
     //   </Drawer.Navigator>
     // </NavigationContainer>
 
-    // <NavigationContainer>
-    //   <Stack.Navigator 
-    //     screenOptions={{
-    //     headerStyle: { backgroundColor: Colors.teal },
-    //       headerTintColor: Colors.white,
-    //   }}
-    //   >
-    //       <Stack.Screen
-    //         name="Drawer Navigator"
-    //         component={DrawerNavigator}
-    //         options={{
-    //           headerShown: false
-    //         }} />
-    //     </Stack.Navigator>
-    // </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator 
+          screenOptions={{
+          headerStyle: { backgroundColor: Colors.teal },
+            headerTintColor: Colors.white,
+        }}
+        >
+            <Stack.Screen
+              name="Drawer Navigator"
+              component={DrawerNavigator}
+              options={{
+                headerShown: false
+              }} 
+            />
+            <Stack.Screen
+              name="Add Player"
+              component={AddPlayer}
+              options={{
+                headerShown: false
+              }} 
+            />
+          </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
 
-    <>
-      <AddPlayer/>
-    </>
+    // <>
+    //   <AddPlayer/>
+    // </>
   );
 };
 
