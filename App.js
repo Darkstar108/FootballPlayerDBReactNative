@@ -21,7 +21,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Provider } from 'react-redux'
-import store from './app/redux/Store';
+import {store, persistor} from './app/redux/Store';
+import { PersistGate } from 'redux-persist/integration/react'
 
 import Colors from './app/colors'
 import About from './app/screens/AboutScreen';
@@ -111,29 +112,31 @@ const App: () => Node = () => {
     // </NavigationContainer>
 
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator 
-          screenOptions={{
-          headerStyle: { backgroundColor: Colors.teal },
-            headerTintColor: Colors.white,
-        }}
-        >
-            <Stack.Screen
-              name="Drawer Navigator"
-              component={DrawerNavigator}
-              options={{
-                headerShown: false
-              }} 
-            />
-            <Stack.Screen
-              name="Add Player"
-              component={AddPlayer}
-              options={{
-                headerShown: false
-              }} 
-            />
-          </Stack.Navigator>
-      </NavigationContainer>
+      <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
+        <NavigationContainer>
+          <Stack.Navigator 
+            screenOptions={{
+            headerStyle: { backgroundColor: Colors.teal },
+              headerTintColor: Colors.white,
+          }}
+          >
+              <Stack.Screen
+                name="Drawer Navigator"
+                component={DrawerNavigator}
+                options={{
+                  headerShown: false
+                }} 
+              />
+              <Stack.Screen
+                name="Add Player"
+                component={AddPlayer}
+                options={{
+                  headerShown: false
+                }} 
+              />
+            </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
 
     // <>

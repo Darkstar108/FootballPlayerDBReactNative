@@ -1,16 +1,18 @@
 import React from 'react';
 import {
   FlatList,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-  } from 'react-native';
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
 import * as Constants from '../constants'
 import Colors from '../colors'
 import PlayerCard from '../components/PlayerCard';
 
 const PlayerList = ({route}) => {
+  const playerDetails = useSelector((state) => state.playerDetails)
 
   const renderItem = ({ item }) => (
     <PlayerCard playerDetail={item}/>

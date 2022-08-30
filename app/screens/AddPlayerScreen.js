@@ -11,12 +11,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import * as Constants from '../constants'
 import Colors from '../colors'
-import store from '../redux/Store';
+import {store, persistor} from '../redux/Store';
 
 const AddPlayer = ({route}) => {
   // console.log(route.params.playerDetail)
   const playerDetails = useSelector((state) => state.playerDetails)
-  // console.log(playerDetails)
+  console.log(playerDetails)
   const dispatch = useDispatch()
   const [name, onChangeName] = React.useState("");
   const [nationality, onChangeNationality] = React.useState("");
@@ -46,7 +46,7 @@ const AddPlayer = ({route}) => {
     }
     console.log(playerDetail)
     dispatch({type: Constants.PLAYER_LIST_ADD_PLAYER_ACTION, payload: playerDetail})
-    console.log(store.getState)
+    console.log(store.getState())
   }
 
   return (
