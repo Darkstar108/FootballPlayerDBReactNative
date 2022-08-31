@@ -9,6 +9,7 @@ import 'react-native-gesture-handler';
 import React, { useRef } from 'react';
 import type {Node} from 'react';
 import {
+  Button,
   DrawerLayoutAndroid,
   ScrollView,
   StyleSheet,
@@ -24,6 +25,7 @@ import { Provider } from 'react-redux'
 import {store, persistor} from './app/redux/Store';
 import { PersistGate } from 'redux-persist/integration/react'
 
+import * as Constants from './app/constants'
 import Colors from './app/colors'
 import About from './app/screens/AboutScreen';
 import PlayerCard from './app/components/PlayerCard';
@@ -89,8 +91,29 @@ const playerDetails = [
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator initialRouteName="Player List">
-      <Drawer.Screen name="Player List" component={PlayerListScreen} initialParams={{playerDetails: playerDetails}} />
+    <Drawer.Navigator 
+      initialRouteName="Player List"
+      screenOptions={{
+        headerStyle: { backgroundColor: Colors.teal },
+        headerTintColor: Colors.white,
+      }}
+    >
+      <Drawer.Screen 
+        name="Player List" 
+        component={PlayerListScreen} 
+        initialParams={{playerDetails: playerDetails}} 
+        // options={{
+        //   headerRight: () => (
+        //     <View style={styles.addPlayerHeaderButton}>
+        //       <Button
+        //         title={Constants.ADD_PLAYER_BUTTON_TITLE}
+        //         onPress={console.log("Add Player")}
+        //         color={Colors.teal}
+        //       />
+        //     </View>
+        //   ),
+        // }}
+      />
       <Drawer.Screen name="About" component={About} />
     </Drawer.Navigator>
   );
@@ -114,12 +137,7 @@ const App: () => Node = () => {
     <Provider store={store}>
       <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
         <NavigationContainer>
-          <Stack.Navigator 
-            screenOptions={{
-            headerStyle: { backgroundColor: Colors.teal },
-              headerTintColor: Colors.white,
-          }}
-          >
+          <Stack.Navigator>
               <Stack.Screen
                 name="Drawer Navigator"
                 component={DrawerNavigator}
@@ -161,6 +179,9 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  addPlayerHeaderButton: {
+    marginHorizontal: 10,
   },
 });
 
