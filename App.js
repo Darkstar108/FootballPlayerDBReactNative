@@ -23,6 +23,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Provider } from 'react-redux'
 import {store, persistor} from './app/redux/Store';
+import { useSelector, useDispatch } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import * as Constants from './app/constants'
@@ -32,6 +33,7 @@ import PlayerCard from './app/components/PlayerCard';
 import PlayerListScreen from './app/screens/PlayerListScreen'
 import Toolbar from './app/components/Toolbar';
 import AddPlayer from './app/screens/AddPlayerScreen';
+import EditPlayer from './app/screens/EditPlayerScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -126,6 +128,10 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darkGrey : Colors.lightGrey,
   };
 
+  // console.log(store.getState().playerDetails.length)
+  console.log("PlayerDetails in State")
+  console.log(store.getState().playerDetails)
+
   return (
     // <NavigationContainer>
     //   <Drawer.Navigator initialRouteName="Player List">
@@ -148,6 +154,13 @@ const App: () => Node = () => {
               <Stack.Screen
                 name="Add Player"
                 component={AddPlayer}
+                options={{
+                  headerShown: false
+                }} 
+              />
+              <Stack.Screen
+                name="Edit Player"
+                component={EditPlayer}
                 options={{
                   headerShown: false
                 }} 

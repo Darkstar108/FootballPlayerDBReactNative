@@ -30,5 +30,8 @@ export const SUBMIT_PLAYER_BUTTON_TITLE = "Submit Player"
 export const PLAYER_LIST_ADD_PLAYER_ACTION = "playerList/addPlayer"
 export const PLAYER_LIST_EDIT_PLAYER_ACTION = "playerList/editPlayer"
 export const PLAYER_LIST_DELETE_PLAYER_ACTION = "playerList/deletePlayer"
+export const PLAYER_LIST_EMPTY_LIST = "playerList/emptyList"
 
+// Player List Screen
 export const ADD_PLAYER_BUTTON_TITLE = "Add Player"
+export const EMPTY_PLAYER_LIST_TEXT = "Player List is Empty"

@@ -14,7 +14,7 @@ const playerDetailsReducer = (state = initialState, action) => {
         case Constants.PLAYER_LIST_EDIT_PLAYER_ACTION:
             return {
             ...state,
-            playerDetails: playerDetails.map((playerDetail) => {
+            playerDetails: state.playerDetails.map((playerDetail) => {
                 if(playerDetail.name !== action.payload.name)
                     return playerDetail
                 return action.payload
@@ -23,7 +23,12 @@ const playerDetailsReducer = (state = initialState, action) => {
         case Constants.PLAYER_LIST_DELETE_PLAYER_ACTION:
             return {
             ...state,
-            playerDetails: playerDetails.filter((playerDetail) => playerDetail.name !== action.payload.name)
+            playerDetails: state.playerDetails.filter((playerDetail) => playerDetail.name !== action.payload.name)
+            }
+        case Constants.PLAYER_LIST_EMPTY_LIST:
+            return {
+            ...state,
+            playerDetails: []
             }
         default:
             return state;

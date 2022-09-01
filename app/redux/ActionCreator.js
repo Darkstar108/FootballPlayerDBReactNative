@@ -20,3 +20,9 @@ export const deletePlayerDetail = (playerDetail) => {
         payload: playerDetail
     }
 }
+
+export const emptyList = () => {
+    return {
+        type: Constants.PLAYER_LIST_EMPTY_LIST
+    }
+}

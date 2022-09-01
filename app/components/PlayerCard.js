@@ -8,11 +8,14 @@ import {
     View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux'
 import * as Constants from '../constants'
 import Colors from '../colors'
 
 const PlayerCard = (props) => {
     const navigation = useNavigation();
+    const playerDetails = useSelector((state) => state.playerDetails)
+    const dispatch = useDispatch()
     return (
         <View style={styles.card}>
             <View style={styles.infoContainer}>
@@ -78,12 +81,12 @@ const PlayerCard = (props) => {
             <View style={styles.buttonContainer}>
                 <Button
                     title={Constants.EDIT_PLAYER_BUTTON_TITLE}
-                    onPress={() => {navigation.navigate('Add Player', {playerDetail: props.playerDetail});}}
+                    onPress={() => {navigation.navigate('Edit Player', {playerDetail: props.playerDetail});}}
                     color={Colors.teal}
                 />
                 <Button
                     title={Constants.DELETE_PLAYER_BUTTON_TITLE}
-                    onPress={() => Alert.alert('Delete Player Button pressed')}
+                    onPress={() => dispatch({type: Constants.PLAYER_LIST_DELETE_PLAYER_ACTION, payload: props.playerDetail})}
                     color={Colors.teal}
                 />
             </View>

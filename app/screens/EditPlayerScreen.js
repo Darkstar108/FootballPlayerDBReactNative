@@ -13,24 +13,31 @@ import * as Constants from '../constants'
 import Colors from '../colors'
 import {store, persistor} from '../redux/Store';
 
-const AddPlayer = ({navigation, route}) => {
+const EditPlayer = ({navigation, route}) => {
   // console.log(route.params.playerDetail)
   const playerDetails = useSelector((state) => state.playerDetails)
   // console.log(playerDetails)
   const dispatch = useDispatch()
-  const [name, onChangeName] = React.useState("");
-  const [nationality, onChangeNationality] = React.useState("");
-  const [age, onChangeAge] = React.useState(0);
-  const [position, onChangePosition] = React.useState("");
-  const [attack, onChangeAttack] = React.useState(0);
-  const [midfield, onChangeMidfield] = React.useState(0);
-  const [defence, onChangeDefence] = React.useState(0);
-  const [imageUrl, onChangeImageUrl] = React.useState("");
+  const [name, onChangeName] = React.useState(route.params.playerDetail.name);
+  const [nationality, onChangeNationality] = React.useState(route.params.playerDetail.nationality);
+  const [age, onChangeAge] = React.useState(route.params.playerDetail.age);
+  const [position, onChangePosition] = React.useState(route.params.playerDetail.position);
+  const [attack, onChangeAttack] = React.useState(route.params.playerDetail.attack);
+  const [midfield, onChangeMidfield] = React.useState(route.params.playerDetail.midfield);
+  const [defence, onChangeDefence] = React.useState(route.params.playerDetail.defence);
+  const [imageUrl, onChangeImageUrl] = React.useState(route.params.playerDetail.imageUrl);
   var radio_props = [
     {label: Constants.FORWARD, value: Constants.FORWARD},
     {label: Constants.MIDFIELDER, value: Constants.MIDFIELDER},
     {label: Constants.DEFENDER, value: Constants.DEFENDER},
   ];
+  var initial = -1;
+  if(position === Constants.FORWARD) 
+    initial = 0
+  else if(position === Constants.MIDFIELDER)
+    initial = 1
+  else
+    initial = 2
 
   const onClickSubmitPlayerButton = () => {
     var playerDetail = {
@@ -44,52 +51,53 @@ const AddPlayer = ({navigation, route}) => {
       "defence": defence
     }
     console.log(playerDetail)
-    dispatch({type: Constants.PLAYER_LIST_ADD_PLAYER_ACTION, payload: playerDetail})
+    dispatch({type: Constants.PLAYER_LIST_EDIT_PLAYER_ACTION, payload: playerDetail})
     console.log(store.getState())
     navigation.navigate('Player List')
   }
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.addPlayerTitle}>
+      <Text style={styles.editPlayerTitle}>
         {Constants.CUSTOMIZE_PLAYER_DETAILS_TITLE}
       </Text>
       <TextInput
-        style={styles.addPlayerInput}
+        style={styles.editPlayerInput}
         onChangeText={onChangeName}
         value={name}
         placeholder={Constants.PLAYER_NAME_PLACEHOLDER}
+        editable={false}
         underlineColorAndroid={Colors.teal}
       />
       <TextInput
-        style={styles.addPlayerInput}
+        style={styles.editPlayerInput}
         onChangeText={onChangeNationality}
         value={nationality}
         placeholder={Constants.PLAYER_NATIONALITY_PLACEHOLDER}
         underlineColorAndroid={Colors.teal}
       />
       <TextInput
-        style={styles.addPlayerInput}
+        style={styles.editPlayerInput}
         onChangeText={onChangeAge}
         value={age}
         placeholder={Constants.PLAYER_AGE_PLACEHOLDER}
         underlineColorAndroid={Colors.teal}
         keyboardType="numeric"
       />
-      <View style={styles.addPlayerPositionContainer}>
-      <Text style={styles.addPlayerInput}>
+      <View style={styles.editPlayerPositionContainer}>
+      <Text style={styles.editPlayerInput}>
         {Constants.PLAYER_POSITION}
       </Text>
         <RadioForm
           radio_props={radio_props}
-          initial={-1}
+          initial={initial}
           buttonColor={Colors.teal}
           onPress={(value) => {onChangePosition(value)}}
         />
       </View>
-      <View style={styles.addPlayerStatsContainer}>
+      <View style={styles.editPlayerStatsContainer}>
         <TextInput
-          style={[styles.addPlayerInput, styles.addPlayerStatsInput]}
+          style={[styles.editPlayerInput, styles.editPlayerStatsInput]}
           onChangeText={onChangeAttack}
           value={attack}
           placeholder={Constants.PLAYER_ATTACK_RATING}
@@ -97,7 +105,7 @@ const AddPlayer = ({navigation, route}) => {
           keyboardType="numeric"
         />
         <TextInput
-          style={[styles.addPlayerInput, styles.addPlayerStatsInput]}
+          style={[styles.editPlayerInput, styles.editPlayerStatsInput]}
           onChangeText={onChangeMidfield}
           value={midfield}
           placeholder={Constants.PLAYER_MIDFIELD_RATING}
@@ -105,7 +113,7 @@ const AddPlayer = ({navigation, route}) => {
           keyboardType="numeric"
         />
         <TextInput
-          style={[styles.addPlayerInput, styles.addPlayerStatsInput]}
+          style={[styles.editPlayerInput, styles.editPlayerStatsInput]}
           onChangeText={onChangeDefence}
           value={defence}
           placeholder={Constants.PLAYER_DEFENCE_RATING}
@@ -114,7 +122,7 @@ const AddPlayer = ({navigation, route}) => {
         />
       </View>
       <TextInput
-        style={styles.addPlayerInput}
+        style={styles.editPlayerInput}
         onChangeText={onChangeImageUrl}
         value={imageUrl}
         placeholder={Constants.PLAYER_IMAGE_URL_PLACEHOLDER}
@@ -136,21 +144,21 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
-  addPlayerStatsContainer: {
+  editPlayerStatsContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
-  addPlayerPositionContainer: {
+  editPlayerPositionContainer: {
     margin: 10,
   },
-  addPlayerTitle: {
+  editPlayerTitle: {
     fontSize: 24, 
     fontWeight: '600',
     color: 'black',
     marginVertical: 20,
     textAlign: "center",
   },
-  addPlayerInput: {
+  editPlayerInput: {
     fontSize: 16,
     fontWeight: '400',
     color: 'black',
@@ -158,7 +166,7 @@ const styles = StyleSheet.create({
     // borderBottomWidth: 1,
     margin: 10,
   },
-  addPlayerStatsInput: {
+  editPlayerStatsInput: {
   },
   submitPlayerButtonView: {
     marginVertical: 20,
@@ -166,4 +174,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddPlayer;
+export default EditPlayer;
