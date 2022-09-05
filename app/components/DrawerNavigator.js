@@ -18,23 +18,12 @@ const DrawerNavigator = () => {
       screenOptions={{
         headerStyle: { backgroundColor: Colors.teal },
         headerTintColor: Colors.white,
+        // headerTitleAlign: "center"
       }}
     >
       <Drawer.Screen 
         name="Player List" 
         component={PlayerList} 
-        // initialParams={{playerDetails: playerDetails}} 
-        // options={{
-        //   headerRight: () => (
-        //     <View style={styles.addPlayerHeaderButton}>
-        //       <Button
-        //         title={Constants.ADD_PLAYER_BUTTON_TITLE}
-        //         onPress={console.log("Add Player")}
-        //         color={Colors.teal}
-        //       />
-        //     </View>
-        //   ),
-        // }}
       />
       <Drawer.Screen name="About" component={About} />
     </Drawer.Navigator>

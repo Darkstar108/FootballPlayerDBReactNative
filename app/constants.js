@@ -35,3 +35,4 @@ export const PLAYER_LIST_EMPTY_LIST = "playerList/emptyList"
 // Player List Screen
 export const ADD_PLAYER_BUTTON_TITLE = "Add Player"
 export const EMPTY_PLAYER_LIST_TEXT = "Player List is Empty"
+export const SEARCH_INPUT_PLACEHOLDER = "Search by name"

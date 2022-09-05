@@ -161,9 +161,7 @@ const styles = StyleSheet.create({
   editPlayerInput: {
     fontSize: 16,
     fontWeight: '400',
-    color: 'black',
-    // borderBottomColor: Colors.darkGrey,
-    // borderBottomWidth: 1,
+    color: Colors.black,
     margin: 10,
   },
   editPlayerStatsInput: {

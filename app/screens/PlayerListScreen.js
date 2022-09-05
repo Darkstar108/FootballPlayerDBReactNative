@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 import { FloatingAction } from "react-native-floating-action";
@@ -16,6 +18,43 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const PlayerList = ({navigation, route}) => {
   const playerDetails = useSelector((state) => state.playerDetails)
+  const [searchText, onChangeSearchText] = useState('');
+  const [filteredPlayerDetails, onChangeFilteredPlayerDetails] = useState(playerDetails);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <View style={styles.searchBarView}>
+            <TextInput
+              style={styles.searchBarInput}
+              onChangeText={(query) => handleSearch(query)}
+              value={searchText}
+              placeholder={Constants.SEARCH_INPUT_PLACEHOLDER}
+            />
+          </View>
+        );
+      },
+    });
+  });
+
+  useEffect(() => {
+    console.log("Event Listener focus")
+    const unsubscribe = navigation.addListener('focus', () => {
+      handleSearch("")
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  const handleSearch = (query) => {
+    onChangeSearchText(query)
+    const tempPlayerDetails = playerDetails.filter((playerDetail) => {
+      return playerDetail.name.toLowerCase().includes(query.toLowerCase())
+    })
+    onChangeFilteredPlayerDetails(tempPlayerDetails)
+    console.log("Filtered Player Details")
+    console.log(filteredPlayerDetails.length)
+  }
 
   const renderItem = ({ item }) => (
     <PlayerCard playerDetail={item}/>
@@ -50,7 +89,7 @@ const PlayerList = ({navigation, route}) => {
     <View style={styles.playerListContainer}>
       <FlatList
         // data={route.params.playerDetails}
-        data={playerDetails}
+        data={filteredPlayerDetails}
         renderItem={renderItem}
         keyExtractor={item => item.name}
         ItemSeparatorComponent={ItemDivider}
@@ -92,6 +131,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     color: Colors.black,
+  },
+  searchBarView: {
+    marginHorizontal: 10,
+    justifyContent: "center"
+  },
+  searchBarInput: {
+    height: "80%",
+    fontSize: 14,
+    fontWeight: '400',
+    color: Colors.black,
+    backgroundColor: Colors.white,
+    // borderBottomColor: Colors.darkGrey,
+    // borderBottomWidth: 1,
   },
 });
 
