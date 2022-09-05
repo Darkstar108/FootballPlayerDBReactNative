@@ -29,14 +29,14 @@ import { PersistGate } from 'redux-persist/integration/react'
 import * as Constants from './app/constants'
 import Colors from './app/colors'
 import About from './app/screens/AboutScreen';
+import DrawerNavigator from './app/components/DrawerNavigator';
 import PlayerCard from './app/components/PlayerCard';
-import PlayerListScreen from './app/screens/PlayerListScreen'
+import PlayerList from './app/screens/PlayerListScreen'
 import Toolbar from './app/components/Toolbar';
 import AddPlayer from './app/screens/AddPlayerScreen';
 import EditPlayer from './app/screens/EditPlayerScreen';
 
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
 
 const playerDetails = [
   {
@@ -91,36 +91,6 @@ const playerDetails = [
   }
 ]
 
-const DrawerNavigator = () => {
-  return (
-    <Drawer.Navigator 
-      initialRouteName="Player List"
-      screenOptions={{
-        headerStyle: { backgroundColor: Colors.teal },
-        headerTintColor: Colors.white,
-      }}
-    >
-      <Drawer.Screen 
-        name="Player List" 
-        component={PlayerListScreen} 
-        initialParams={{playerDetails: playerDetails}} 
-        // options={{
-        //   headerRight: () => (
-        //     <View style={styles.addPlayerHeaderButton}>
-        //       <Button
-        //         title={Constants.ADD_PLAYER_BUTTON_TITLE}
-        //         onPress={console.log("Add Player")}
-        //         color={Colors.teal}
-        //       />
-        //     </View>
-        //   ),
-        // }}
-      />
-      <Drawer.Screen name="About" component={About} />
-    </Drawer.Navigator>
-  );
-}
-
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -128,18 +98,7 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darkGrey : Colors.lightGrey,
   };
 
-  // console.log(store.getState().playerDetails.length)
-  console.log("PlayerDetails in State")
-  console.log(store.getState().playerDetails)
-
   return (
-    // <NavigationContainer>
-    //   <Drawer.Navigator initialRouteName="Player List">
-    //     <Drawer.Screen name="Player List" component={PlayerListScreen} initialParams={{playerDetails: playerDetails}} />
-    //     <Drawer.Screen name="About" component={About} />
-    //   </Drawer.Navigator>
-    // </NavigationContainer>
-
     <Provider store={store}>
       <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
         <NavigationContainer>
@@ -169,33 +128,10 @@ const App: () => Node = () => {
         </NavigationContainer>
       </PersistGate>
     </Provider>
-
-    // <>
-    //   <AddPlayer/>
-    // </>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  addPlayerHeaderButton: {
-    marginHorizontal: 10,
-  },
 });
 
 export default App;
