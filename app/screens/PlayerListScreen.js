@@ -17,9 +17,15 @@ import PlayerCard from '../components/PlayerCard';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const PlayerList = ({navigation, route}) => {
+  const dispatch = useDispatch()
   const playerDetails = useSelector((state) => state.playerDetails)
   const [searchText, onChangeSearchText] = useState('');
   const [filteredPlayerDetails, onChangeFilteredPlayerDetails] = useState(playerDetails);
+
+  useEffect(() => {
+    // dispatch({type: Constants.PLAYER_LIST_EMPTY_LIST})
+    // dispatch({type: Constants.PLAYER_LIST_ADD_PLAYER_ACTION, payload: Constants.playerDetails[1]})
+  });
 
   useEffect(() => {
     navigation.setOptions({
@@ -39,7 +45,6 @@ const PlayerList = ({navigation, route}) => {
   });
 
   useEffect(() => {
-    console.log("Event Listener focus")
     const unsubscribe = navigation.addListener('focus', () => {
       handleSearch("")
     });
@@ -52,8 +57,8 @@ const PlayerList = ({navigation, route}) => {
       return playerDetail.name.toLowerCase().includes(query.toLowerCase())
     })
     onChangeFilteredPlayerDetails(tempPlayerDetails)
-    console.log("Filtered Player Details")
-    console.log(filteredPlayerDetails.length)
+    console.log("Filtered Player Details with query: " + query)
+    console.log(filteredPlayerDetails)
   }
 
   const renderItem = ({ item }) => (
@@ -89,7 +94,7 @@ const PlayerList = ({navigation, route}) => {
     <View style={styles.playerListContainer}>
       <FlatList
         // data={route.params.playerDetails}
-        data={filteredPlayerDetails}
+        data={searchText.length == 0 ? playerDetails : filteredPlayerDetails}
         renderItem={renderItem}
         keyExtractor={item => item.name}
         ItemSeparatorComponent={ItemDivider}
