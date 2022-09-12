@@ -6,9 +6,11 @@ import 'react-native-gesture-handler';
  * @format
  * @flow strict-local
  */
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import type {Node} from 'react';
 import {
+  Alert,
+  BackHandler,
   Button,
   DrawerLayoutAndroid,
   ScrollView,
@@ -43,6 +45,27 @@ const App: () => Node = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darkGrey : Colors.lightGrey,
   };
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to exit?", [
+        {
+          text: "No",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <Provider store={store}>
