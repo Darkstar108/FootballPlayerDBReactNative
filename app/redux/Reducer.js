@@ -15,6 +15,7 @@ const playerDetailsReducer = (state = initialState, action) => {
                 playerNames: [...state.playerNames, action.payload.name]
                 }
             }
+            break;
         case Constants.PLAYER_LIST_EDIT_PLAYER_ACTION:
             return {
             ...state,

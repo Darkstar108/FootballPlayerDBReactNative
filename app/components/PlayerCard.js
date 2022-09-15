@@ -2,19 +2,17 @@ import React from 'react';
 import {
     Button,
     Image,
-    ScrollView,
     StyleSheet,
     Text,
     View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import * as Constants from '../constants'
 import Colors from '../colors'
 
 const PlayerCard = (props) => {
     const navigation = useNavigation();
-    const playerDetails = useSelector((state) => state.playerDetails)
     const dispatch = useDispatch()
     return (
         <View style={styles.card}>

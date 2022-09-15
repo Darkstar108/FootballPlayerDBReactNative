@@ -7,16 +7,12 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux'
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
 import * as Constants from '../constants'
 import Colors from '../colors'
-import {store, persistor} from '../redux/Store';
+import {store} from '../redux/Store';
 
 const AddPlayer = ({navigation, route}) => {
-  // console.log(route.params.playerDetail)
-  const playerDetails = useSelector((state) => state.playerDetails)
-  // console.log(playerDetails)
   const dispatch = useDispatch()
   const [name, onChangeName] = React.useState("");
   const [nationality, onChangeNationality] = React.useState("");
@@ -26,14 +22,14 @@ const AddPlayer = ({navigation, route}) => {
   const [midfield, onChangeMidfield] = React.useState(0);
   const [defence, onChangeDefence] = React.useState(0);
   const [imageUrl, onChangeImageUrl] = React.useState("");
-  var radio_props = [
+  let radio_props = [
     {label: Constants.FORWARD, value: Constants.FORWARD},
     {label: Constants.MIDFIELDER, value: Constants.MIDFIELDER},
     {label: Constants.DEFENDER, value: Constants.DEFENDER},
   ];
 
   const onClickSubmitPlayerButton = () => {
-    var playerDetail = {
+    let playerDetail = {
       "name": name,
       "nationality": nationality,
       "position": position,

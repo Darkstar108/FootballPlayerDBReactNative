@@ -1,23 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {
   FlatList,
-  Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
 import { FloatingAction } from "react-native-floating-action";
-// import ActionButton from 'react-native-action-button';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import * as Constants from '../constants'
 import Colors from '../colors'
 import PlayerCard from '../components/PlayerCard';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const PlayerList = ({navigation, route}) => {
-  const dispatch = useDispatch()
   const playerDetails = useSelector((state) => state.playerDetails)
   const [searchText, onChangeSearchText] = useState('');
   const [filteredPlayerDetails, onChangeFilteredPlayerDetails] = useState(playerDetails);

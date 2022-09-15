@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-    View,
     StyleSheet
 } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import * as Constants from '../constants'
 import Colors from '../colors'
 import About from '../screens/AboutScreen';
 import PlayerList from '../screens/PlayerListScreen';

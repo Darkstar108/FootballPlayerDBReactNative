@@ -7,16 +7,13 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux'
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import { useDispatch } from 'react-redux'
+import RadioForm from 'react-native-simple-radio-button';
 import * as Constants from '../constants'
 import Colors from '../colors'
-import {store, persistor} from '../redux/Store';
+import {store} from '../redux/Store';
 
 const EditPlayer = ({navigation, route}) => {
-  // console.log(route.params.playerDetail)
-  const playerDetails = useSelector((state) => state.playerDetails)
-  // console.log(playerDetails)
   const dispatch = useDispatch()
   const [name, onChangeName] = React.useState(route.params.playerDetail.name);
   const [nationality, onChangeNationality] = React.useState(route.params.playerDetail.nationality);
@@ -26,12 +23,12 @@ const EditPlayer = ({navigation, route}) => {
   const [midfield, onChangeMidfield] = React.useState(route.params.playerDetail.midfield);
   const [defence, onChangeDefence] = React.useState(route.params.playerDetail.defence);
   const [imageUrl, onChangeImageUrl] = React.useState(route.params.playerDetail.imageUrl);
-  var radio_props = [
+  let radio_props = [
     {label: Constants.FORWARD, value: Constants.FORWARD},
     {label: Constants.MIDFIELDER, value: Constants.MIDFIELDER},
     {label: Constants.DEFENDER, value: Constants.DEFENDER},
   ];
-  var initial = -1;
+  let initial = -1;
   if(position === Constants.FORWARD) 
     initial = 0
   else if(position === Constants.MIDFIELDER)
@@ -40,7 +37,7 @@ const EditPlayer = ({navigation, route}) => {
     initial = 2
 
   const onClickSubmitPlayerButton = () => {
-    var playerDetail = {
+    let playerDetail = {
       "name": name,
       "nationality": nationality,
       "position": position,

@@ -5,12 +5,10 @@ import 'react-native';
 import React from 'react';
 import AddPlayer from '../../app/screens/AddPlayerScreen';
 import * as Constants from '../../app/constants';
-import Colors from '../../app/colors'
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, screen } from '@testing-library/react-native';
 import { renderWithProviders } from '../../app/utils/test-utils';
 
 // Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
 
 const createTestProps = (props: Object) => ({
     navigation: {
@@ -26,7 +24,6 @@ describe("Testing Add Player Screen", () => {
     });
 
     it('Renders Add Player Screen title', () => {
-        const {store} = renderWithProviders(<AddPlayer {...props}/>);
         expect(screen.queryByText(Constants.CUSTOMIZE_PLAYER_DETAILS_TITLE)).toBeTruthy();
     });
 
